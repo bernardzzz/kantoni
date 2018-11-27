@@ -1,15 +1,22 @@
 // @flow
-import grpc from 'grpc'
+const grpc = require('grpc')
 
+/**
+ * gRPC server
+ */
 class Server {
   environment: string
+  server: any
   constructor (environment: 'dev' | 'production') {
     this.environment = environment
   }
 
   run (): void {
-    grpc.Server()
+    console.log('fired')
+    this.server = grpc.Server()
+    console.log(this.server)
+    this.server.start()
   }
 }
 
-export default Server
+module.exports = Server

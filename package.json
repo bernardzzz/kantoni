@@ -7,24 +7,37 @@
   "license": "private",
   "private": true,
   "scripts": {
-    "start": "docker build -t kantoni:latest ./src && docker run kantoni:latest",
-    "check": "flow check"
+    "build:image": "docker build -t kantoni:latest .",
+    "build": "flow-remove-types ./src/grpc -d ./target/grpc",
+    "lint": "flow ./src/grpc &&standard ./src/**/*.js | snazzy",
+    "stub": "rm -rf stub && cd ./src/protos && ls *.proto | xargs grpc_tools_node_protoc --js_out=import_style=commonjs,binary:../stub/ --grpc_out=../stub/ --plugin=grpc_tools_node_protoc_plugin "
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.2.6",
-    "babel-preset-flow": "^6.23.0",
-    "eslint-plugin-flowtype": "^2.50.0",
+    "babel-eslint": "^10.0.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "eslint-plugin-flowtype": "^3.2.0",
     "flow-bin": "^0.79.1",
+    "flow-remove-types": "^1.2.3",
+    "grpc-tools": "^1.6.6",
+    "snazzy": "^8.0.0",
     "standard": "^11.0.1"
   },
   "standard": {
     "parser": "babel-eslint",
     "plugins": [
       "flowtype"
+    ],
+    "ignore": [
+      "src/lang/**/*",
+      "src/stub/**/*"
     ]
   },
   "dependencies": {
     "grpc": "^1.14.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
