@@ -1,7 +1,7 @@
 {
   "name": "kantoni",
   "version": "0.0.1",
-  "description": "polyglot gRPC runtime",
+  "description": "A Polyglot gRPC Server",
   "main": "index.js",
   "author": "bernardzzz <bernardwong.work@gmail.com>",
   "license": "private",
