@@ -33,6 +33,7 @@
     ]
   },
   "dependencies": {
+    "google-protobuf": "^3.6.1",
     "grpc": "^1.14.1"
   },
   "config": {
